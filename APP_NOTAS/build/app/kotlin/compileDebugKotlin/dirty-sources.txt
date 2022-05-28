@@ -1,0 +1,1 @@
+C:\Users\Hubert\Documents\GITHUB\notas\android\app\src\main\kotlin\com\example\note\MainActivity.kt
