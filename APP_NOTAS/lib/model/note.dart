@@ -1,3 +1,5 @@
+ import 'dart:convert';
+ 
  String tableNotes = 'notes';
 
 class NoteFields {
@@ -33,6 +35,12 @@ class Note {
     required this.description,
     required this.createdTime,
   });
+
+////static List<Note> noteFromJson(String str) => List<Note>.from(json.decode(str).map((x) => Note.fromJson(x)));
+
+//static String noteToJson(List<Note> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+static List<Note> noteFromJson(String str) => List<Note>.from(json.decode(str).map((x) => Note.fromJson(x)));
+
   Note copy({
     int? id,
     bool? isImportant,
@@ -55,7 +63,7 @@ class Note {
         number: json[NoteFields.number] as int,
         title: json[NoteFields.title] as String,
         description: json[NoteFields.description] as String,
-        createdTime: DateTime.parse(json[NoteFields.time] as String),
+        createdTime: DateTime.now() 
       );
     Map<String, Object?> toJson() => {
         NoteFields.id: id,
@@ -65,4 +73,8 @@ class Note {
         NoteFields.description: description,
         NoteFields.time: createdTime.toIso8601String(),
       };
+
+
+
+
 }

@@ -1,6 +1,7 @@
 import 'package:note/model/note.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:note/helpers/api_helper.dart';
 
 class NotesDatabase {
   static final NotesDatabase instance = NotesDatabase._init();
@@ -90,8 +91,8 @@ CREATE TABLE $tableNotes(
       tableNotes,
       orderBy: orderBy,
     );
-
-    return result.map((json) => Note.fromJson(json)).toList();
+        result.map((json) => Note.fromJson(json)).toList();
+    return ApiHelper.getNotes();
   }
 
   //obtenemos todas las notas con el parametro db.rawquery
