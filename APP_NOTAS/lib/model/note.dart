@@ -20,6 +20,16 @@ class NoteFields {
   static const String time = 'time';
 }
 
+
+List<Note> noteFromMap(String str) => List<Note>.from(json.decode(str).map((x) => Note.fromMap(x)));
+
+String noteToMap(List<Note> data) => json.encode(List<dynamic>.from(data.map((x) => x.toMap())));
+
+
+
+
+
+
 class Note {
   final int? id;
   final bool isImportant;
@@ -36,10 +46,6 @@ class Note {
     required this.createdTime,
   });
 
-////static List<Note> noteFromJson(String str) => List<Note>.from(json.decode(str).map((x) => Note.fromJson(x)));
-
-//static String noteToJson(List<Note> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-static List<Note> noteFromJson(String str) => List<Note>.from(json.decode(str).map((x) => Note.fromJson(x)));
 
   Note copy({
     int? id,
@@ -74,6 +80,23 @@ static List<Note> noteFromJson(String str) => List<Note>.from(json.decode(str).m
         NoteFields.time: createdTime.toIso8601String(),
       };
 
+    factory Note.fromMap(Map<String, dynamic> json) => Note(
+        id: int.parse(json["id"]),
+        isImportant:  json["isImportant"] == 'true',
+        number: int.parse(json["number"]) ,
+        title: json["title"] ,
+        description: json["description"],
+        createdTime: DateTime.parse(json["createdTime"]),
+    );
+
+    Map<String, dynamic> toMap() => {
+        "id": id,
+        "isImportant": isImportant,
+        "number": number,
+        "title": title,
+        "description": description,
+        "createdTime": createdTime.toIso8601String(),
+    };
 
 
 
